@@ -6,28 +6,64 @@
     </head>
     <body>
         <script>
-            function getComputerChoice(choice) {
-                choice = Math.floor(Math.random() * 100);
+            
+            game();
+            function game() {
+                let computerWins = 0;
+                let playerWins = 0;
+                for (let i = 0; i < 5; i++) {
+                    let playerSelection = getplayerSelection();
+                    let computerChoice = getComputerChoice();
+                    playRound(playerSelection, computerChoice);
+                    function playRound(playerSelection, computerChoice) {
+                        if ((playerSelection == "rock" && computerChoice == "paper") || (playerSelection == "paper" && computerChoice == "scissors") || (playerSelection == "scissors" && computerChoice == "rock")) {
+                            alert("You lose");
+                            ++computerWins;
+                        } else if ((playerSelection == "paper" && computerChoice == "paper") || (playerSelection == "rock" && computerChoice == "rock") || (playerSelection == "scissors" && computerChoice == "scissors")) {
+                            alert('tie');
+                        } else if ((playerSelection == "paper" && computerChoice == "rock") || (playerSelection == "scissors" && computerChoice == "paper") || (playerSelection == "rock" && computerChoice == "scissors")) {
+                            alert("You win");
+                            ++playerWins;
+                        } else {
+                            alert("error, reload page");
+                        }
+                        console.log(playerSelection);
+                        console.log(computerChoice);
+                        console.log(computerWins + " :Computer");
+                        console.log(playerWins + " :Player");
+                    }
 
-                if (choice >= 66) {
-                    choice = "rock"
-                } else if (choice > 33 && choice < 66) {
-                    choice = "scissors"
-                } else if (choice <= 33) {
-                    choice = "paper"   
-                } 
-                return choice;
-            }
-            console.log(getComputerChoice());
-            let playerSelection = prompt("Rock, Paper, or Scissors?", '');
-            if ((playerSelection.toLowerCase() == "rock" && getComputerChoice() == "paper") || (playerSelection.toLowerCase() == "paper" && getComputerChoice() == "scissors") || (playerSelection.toLowerCase() == "scissors" && getComputerChoice() == "rock")) {
-                 alert("You lose");
-            } else if ((playerSelection.toLowerCase() == "paper" && getComputerChoice() == "paper") || (playerSelection.toLowerCase() == "rock" && getComputerChoice() == "rock") || (playerSelection.toLowerCase() == "scissors" && getComputerChoice() == "scissors")) {
-                alert('tie, reload page');
-            } if ((playerSelection.toLowerCase() == "paper" && getComputerChoice() == "rock") || (playerSelection.toLowerCase() == "scissors" && getComputerChoice() == "paper") || (playerSelection.toLowerCase() == "rock" && getComputerChoice() == "scissors")) {
-                alert("You win");
-            } else {
-                alert("error, reload page")
+                
+                
+
+                    function getComputerChoice(choice) {
+                    choice = Math.floor(Math.random() * 100);
+
+                        if (choice >= 66) {
+                            choice = "rock"
+                        } else if (choice > 33 && choice < 66) {
+                            choice = "scissors"
+                        } else if (choice <= 33) {
+                            choice = "paper"   
+                        } 
+                        return choice;
+                    }
+                    function getplayerSelection(playerSelection) {
+                        playerSelection = prompt("Rock, Paper, or Scissors?", '');
+                        playerSelection = playerSelection.toLowerCase();
+                        return playerSelection;
+                    }
+
+                }
+                
+                if (computerWins > playerWins) {
+                     alert("You lost Everything");
+                } else if (computerWins < playerWins) {
+                    alert("You win everything");
+                } else {
+                    alert("maltfunction, tie")
+                }
+                
             }
         </script>
     </body>
